@@ -85,4 +85,45 @@
   noBtn.addEventListener('touchstart', moveNo);
 
   // Confetti effect
-  function confe
+  function confetti() {
+    for (let i=0; i<120; i++){
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.left = Math.random() * window.innerWidth + 'px';
+      c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3000);
+    }
+  }
+
+  // Disco background
+  function startDisco() {
+    discoInterval = setInterval(() => {
+      document.body.style.background = colors[Math.floor(Math.random()*colors.length)];
+    }, 200);
+  }
+
+  // Yes button click
+  yesBtn.addEventListener('click', () => {
+    confetti();
+    startDisco();
+
+    // Play anthem safely
+    anthem.volume = 0.3;
+    anthem.play().catch(e => console.log("Autoplay blocked. Tap again to start music."));
+
+    // Show end message after a short delay
+    setTimeout(() => {
+      clearInterval(discoInterval); // stop disco after message
+      document.body.style.background = "linear-gradient(90deg, red, orange, yellow, green, blue, purple)";
+      box.innerHTML = "<h1 style='color:white; font-size:32px; text-align:center;'>" +
+        "I KNEW IT 😌🌈<br><br>" +
+        "🏳️‍🌈 GAY. LOUD. PROUD. 🏳️‍🌈<br><br>" +
+        "✨ SLAY FOREVER ✨" +
+        "</h1>";
+    }, 1500);
+  });
+</script>
+
+</body>
+</html>
