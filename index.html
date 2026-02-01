@@ -4,33 +4,35 @@
 <meta charset="UTF-8">
 <title>🌈 Pride Question 🌈</title>
 <style>
-  body {
+  html, body {
     margin: 0;
-    height: 100vh;
-    background: #ffe4ec;
+    height: 100%;
+    width: 100%;
     font-family: Arial, sans-serif;
     overflow: hidden;
-    position: relative;
+    background: #ffe4ec;
     transition: background 0.2s linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #container {
+    text-align: center;
+    z-index: 1;
+    position: relative;
   }
 
   #questionText {
-    text-align: center;
     font-size: 32px;
-    margin-top: 50px;
+    margin-bottom: 20px;
     color: black;
-    z-index: 2;
-    position: relative;
   }
 
   #yesBtn {
-    display: block;
-    margin: 20px auto;
     padding: 14px 28px;
     font-size: 20px;
     cursor: pointer;
-    position: relative;
-    z-index: 2;
   }
 
   #noBtn {
@@ -42,12 +44,9 @@
   }
 
   #message {
-    text-align: center;
     font-size: 32px;
     color: white;
     display: none;
-    position: relative;
-    z-index: 2;
   }
 
   .confetti {
@@ -68,10 +67,12 @@
 </head>
 <body>
 
-<div id="questionText">Do you like men? 😏</div>
-<button id="yesBtn">Yes 🌈</button>
+<div id="container">
+  <div id="questionText">Do you like men? 😏</div>
+  <button id="yesBtn">Yes 🌈</button>
+  <div id="message"></div>
+</div>
 <button id="noBtn">No 😤</button>
-<div id="message"></div>
 
 <audio id="prideAnthem" loop>
   <source src="https://assets.mixkit.co/music/preview/mixkit-happy-pride-theme-615.mp3" type="audio/mpeg">
@@ -97,7 +98,7 @@ function moveNo() {
 noBtn.addEventListener('mouseover', moveNo);
 noBtn.addEventListener('touchstart', moveNo);
 
-// Confetti effect
+// Confetti
 function confetti() {
   for (let i = 0; i < 120; i++) {
     const c = document.createElement('div');
@@ -121,11 +122,10 @@ yesBtn.addEventListener('click', () => {
   confetti();
   startDisco();
 
-  // Play anthem on user click
   anthem.volume = 0.3;
   anthem.play().catch(e => console.log("Audio blocked; tap again."));
 
-  // Hide Yes button, show message
+  // Hide Yes and question, show message
   yesBtn.style.display = 'none';
   questionText.style.display = 'none';
   message.innerHTML = "I KNEW IT 😌🌈<br>🏳️‍🌈 GAY. LOUD. PROUD. 🏳️‍🌈<br>✨ SLAY FOREVER ✨";
