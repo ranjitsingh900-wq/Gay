@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Question 😏</title>
+
+<style>
+  body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffe4ec;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  .box {
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 12px 24px;
+    font-size: 18px;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  #no {
+    position: fixed;
+    left: 50%;
+    top: 60%;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="box" id="box">
+  <h1>Do you like men?</h1>
+
+  <button id="yes">Yes 😏</button>
+  <button id="no">No 😤</button>
+</div>
+
+<script>
+  var noBtn = document.getElementById("no");
+  var yesBtn = document.getElementById("yes");
+  var box = document.getElementById("box");
+
+  function moveNo() {
+    var x = Math.random() * (window.innerWidth - 120);
+    var y = Math.random() * (window.innerHeight - 80);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  noBtn.onmouseover = moveNo;
+  noBtn.ontouchstart = moveNo;
+
+  yesBtn.onclick = function () {
+    var endMessage = "I fucking knew it 😌";
+
+    box.innerHTML =
+      "<h1 style='color:#d1006b;'>" + endMessage + "</h1>";
+  };
+</script>
+
+</body>
+</html>
