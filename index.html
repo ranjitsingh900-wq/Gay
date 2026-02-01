@@ -14,7 +14,7 @@
     background: #ffe4ec;
     font-family: Arial, sans-serif;
     overflow: hidden;
-    transition: background 0.3s linear;
+    transition: background 0.2s linear;
   }
 
   .box {
@@ -59,6 +59,12 @@
   <button id="no" onmouseover="moveNo()" ontouchstart="moveNo()">No 😤</button>
 </div>
 
+<!-- Pride Anthem Audio -->
+<audio id="prideAnthem" loop>
+  <source src="https://assets.mixkit.co/music/preview/mixkit-happy-pride-theme-615.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 <script>
   var colors = ["red", "orange", "yellow", "green", "blue", "purple"];
   var discoInterval;
@@ -72,38 +78,12 @@
   }
 
   function yesClick() {
-    startDisco();
     confetti();
+    startDisco();
+    playAnthem();
 
     setTimeout(function () {
       document.getElementById("box").innerHTML =
         "<h1 style='color:white; font-size:32px;'>" +
         "I KNEW IT 😌🌈<br><br>" +
-        "🏳️‍🌈 GAY. LOUD. PROUD. 🏳️‍🌈<br><br>" +
-        "✨ SLAY FOREVER ✨" +
-        "</h1>";
-    }, 500);
-  }
-
-  function confetti() {
-    for (var i = 0; i < 120; i++) {
-      var c = document.createElement("div");
-      c.className = "confetti";
-      c.style.left = Math.random() * window.innerWidth + "px";
-      c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      document.body.appendChild(c);
-
-      setTimeout(function (el) { return function() { el.remove(); }; }(c), 3000);
-    }
-  }
-
-  function startDisco() {
-    discoInterval = setInterval(function() {
-      document.body.style.background =
-        colors[Math.floor(Math.random() * colors.length)];
-    }, 200); // flash every 0.2s
-  }
-</script>
-
-</body>
-</html>
+        "🏳️‍🌈 GAY. LOUD. PROUD. 🏳️‍🌈<
