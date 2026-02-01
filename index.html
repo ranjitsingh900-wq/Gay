@@ -50,6 +50,13 @@
       opacity: 0;
     }
   }
+
+  #message {
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    display: none;
+  }
 </style>
 </head>
 
@@ -59,6 +66,7 @@
   <h1>Do you like men? 😏</h1>
   <button id="yesBtn">Yes 🌈</button>
   <button id="noBtn">No 😤</button>
+  <div id="message"></div>
 </div>
 
 <audio id="prideAnthem" loop>
@@ -69,12 +77,12 @@
 <script>
   const noBtn = document.getElementById('noBtn');
   const yesBtn = document.getElementById('yesBtn');
-  const box = document.getElementById('box');
+  const message = document.getElementById('message');
   const anthem = document.getElementById('prideAnthem');
   const colors = ["red","orange","yellow","green","blue","purple"];
   let discoInterval;
 
-  // Move No button reliably
+  // Move No button on hover/touch
   function moveNo() {
     const x = Math.random() * (window.innerWidth - 120);
     const y = Math.random() * (window.innerHeight - 80);
@@ -82,11 +90,10 @@
     noBtn.style.top = y + 'px';
   }
 
-  // Attach mouse + touch listeners
   noBtn.addEventListener('mouseover', moveNo);
   noBtn.addEventListener('touchstart', moveNo);
 
-  // Confetti
+  // Confetti effect
   function confetti() {
     for (let i = 0; i < 120; i++) {
       const c = document.createElement('div');
@@ -105,27 +112,14 @@
     }, 200);
   }
 
-  // Yes button click handler
+  // Yes button click
   yesBtn.addEventListener('click', () => {
+    // Play anthem safely
+    anthem.volume = 0.3;
+    anthem.play().catch(e => console.log("Audio blocked; tap again."));
+
     confetti();
     startDisco();
 
-    // Play anthem on click (required by browser)
-    anthem.volume = 0.3;
-    anthem.play().catch(e => console.log("Audio blocked by browser, try tapping again."));
-
-    // Show end message after 1 second
-    setTimeout(() => {
-      clearInterval(discoInterval);
-      document.body.style.background = "linear-gradient(90deg, red, orange, yellow, green, blue, purple)";
-      box.innerHTML = "<h1 style='color:white; font-size:32px; text-align:center;'>" +
-        "I KNEW IT 😌🌈<br><br>" +
-        "🏳️‍🌈 GAY. LOUD. PROUD. 🏳️‍🌈<br><br>" +
-        "✨ SLAY FOREVER ✨" +
-        "</h1>";
-    }, 1000);
-  });
-</script>
-
-</body>
-</html>
+    // Hide buttons but keep No in DOM moving
+    yesBtn
