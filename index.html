@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>🌈 Disco Question 🌈</title>
+<title>🌈 Pride Question 🌈</title>
 
 <style>
   body {
@@ -29,7 +29,7 @@
     cursor: pointer;
   }
 
-  #no {
+  #noBtn {
     position: absolute;
     left: 50%;
     top: 60%;
@@ -63,17 +63,18 @@
 
 <audio id="prideAnthem" loop>
   <source src="https://assets.mixkit.co/music/preview/mixkit-happy-pride-theme-615.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
 </audio>
 
 <script>
   const noBtn = document.getElementById('noBtn');
   const yesBtn = document.getElementById('yesBtn');
   const box = document.getElementById('box');
-  const colors = ["red","orange","yellow","green","blue","purple"];
   const anthem = document.getElementById('prideAnthem');
+  const colors = ["red","orange","yellow","green","blue","purple"];
   let discoInterval;
 
-  // Move "No" button
+  // Move No button reliably
   function moveNo() {
     const x = Math.random() * (window.innerWidth - 120);
     const y = Math.random() * (window.innerHeight - 80);
@@ -81,16 +82,17 @@
     noBtn.style.top = y + 'px';
   }
 
+  // Attach mouse + touch listeners
   noBtn.addEventListener('mouseover', moveNo);
   noBtn.addEventListener('touchstart', moveNo);
 
-  // Confetti effect
+  // Confetti
   function confetti() {
-    for (let i=0; i<120; i++){
+    for (let i = 0; i < 120; i++) {
       const c = document.createElement('div');
       c.className = 'confetti';
       c.style.left = Math.random() * window.innerWidth + 'px';
-      c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+      c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
       document.body.appendChild(c);
       setTimeout(() => c.remove(), 3000);
     }
@@ -103,25 +105,25 @@
     }, 200);
   }
 
-  // Yes button click
+  // Yes button click handler
   yesBtn.addEventListener('click', () => {
     confetti();
     startDisco();
 
-    // Play anthem safely
+    // Play anthem on click (required by browser)
     anthem.volume = 0.3;
-    anthem.play().catch(e => console.log("Autoplay blocked. Tap again to start music."));
+    anthem.play().catch(e => console.log("Audio blocked by browser, try tapping again."));
 
-    // Show end message after a short delay
+    // Show end message after 1 second
     setTimeout(() => {
-      clearInterval(discoInterval); // stop disco after message
+      clearInterval(discoInterval);
       document.body.style.background = "linear-gradient(90deg, red, orange, yellow, green, blue, purple)";
       box.innerHTML = "<h1 style='color:white; font-size:32px; text-align:center;'>" +
         "I KNEW IT 😌🌈<br><br>" +
         "🏳️‍🌈 GAY. LOUD. PROUD. 🏳️‍🌈<br><br>" +
         "✨ SLAY FOREVER ✨" +
         "</h1>";
-    }, 1500);
+    }, 1000);
   });
 </script>
 
