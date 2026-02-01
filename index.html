@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Question 😏</title>
+<title>🌈 Question 🌈</title>
 
 <style>
   body {
@@ -25,11 +25,10 @@
   }
 
   button {
-    padding: 12px 24px;
-    font-size: 18px;
+    padding: 14px 28px;
+    font-size: 20px;
     margin: 10px;
     cursor: pointer;
-    transition: transform 0.2s ease;
   }
 
   #no {
@@ -37,15 +36,31 @@
     left: 50%;
     top: 60%;
   }
+
+  /* 🌈 Confetti */
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall 2.5s linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
 </style>
 </head>
 
 <body>
 
 <div class="box" id="box">
-  <h1>Do you like men?</h1>
+  <h1>Do you like men? 😏</h1>
 
-  <button id="yes">Yes 😏</button>
+  <button id="yes">Yes 🌈</button>
   <button id="no">No 😤</button>
 </div>
 
@@ -65,12 +80,35 @@
   noBtn.ontouchstart = moveNo;
 
   yesBtn.onclick = function () {
-    var endMessage = "I fucking knew it 😌";
+    confettiExplosion();
 
-    box.innerHTML =
-      "<h1 style='color:#d1006b;'>" + endMessage + "</h1>";
+    setTimeout(function () {
+      document.body.style.background =
+        "linear-gradient(90deg, red, orange, yellow, green, blue, purple)";
+      
+      box.innerHTML =
+        "<h1 style='color:white; font-size:32px;'>" +
+        "I KNEW IT 😌🌈<br><br>" +
+        "🏳️‍🌈 GAY. ICONIC. POWERFUL. 🏳️‍🌈<br><br>" +
+        "✨ Slay forever ✨" +
+        "</h1>";
+    }, 600);
   };
-</script>
 
-</body>
-</html>
+  function confettiExplosion() {
+    var colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+
+    for (var i = 0; i < 150; i++) {
+      var confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.backgroundColor =
+        colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDuration =
+        Math.random() * 1.5 + 1.5 + "s";
+
+      document.body.appendChild(confetti);
+
+      setTimeout(function (c) {
+        return function () { c.remove(); };
+      }(confetti), 3000)
